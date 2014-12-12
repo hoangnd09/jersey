@@ -2,27 +2,23 @@ package com.vn.training.ws.api;
 
 import javax.ws.rs.GET;
 import javax.ws.rs.Path;
+import javax.ws.rs.PathParam;
 import javax.ws.rs.Produces;
 import javax.ws.rs.core.MediaType;
+import javax.ws.rs.ext.Provider;
 
 import com.vn.training.persistence.entity.UserEntity;
 
+@Provider
 @Path("user")
-public class UserResource {
-	@GET
-	@Produces(MediaType.TEXT_PLAIN)
-	@Path("/get")
-	public String getUser() {
-		return "Got it!";
-	}
-	
+public class UserProvider {
 	@GET
 	@Produces(MediaType.APPLICATION_JSON)
-	@Path("/getjson")
-	public UserEntity getUserJson() {
+	@Path("/json/get/{id}")
+	public UserEntity getUserJson(@PathParam("id") int userId) {
 		UserEntity user = new UserEntity();
-		user.setId(100);
-		user.setName("name");
+		user.setId(userId);
+		user.setName("name" + userId);
 		return user;
 	}
 }
